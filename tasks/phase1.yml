@@ -1,0 +1,22 @@
+---
+- name: Install python
+  raw: sh -c "ASSUME_ALWAYS_YES=yes pkg install python"
+
+- name: Install sudo
+  pkgng: name=sudo
+
+- name: Create admin user
+  user: name={{ bootstrap_username }}
+
+- name: Disable admin password
+  command: pw user mod {{ bootstrap_username }} -w no
+
+- name: Give sudo
+  lineinfile: "dest=/usr/local/etc/sudoers line='{{ bootstrap_username }}    ALL=(ALL)    NOPASSWD: ALL'"
+
+- name: Allow ttyless sudo
+  lineinfile: dest=/usr/local/etc/sudoers regexp=requiretty state=absent
+
+- name: SSH key
+  authorized_key: user={{ bootstrap_username }}
+                  key="{{ lookup('file', bootstrap_sshkey) }}"

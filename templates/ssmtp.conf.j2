@@ -1,0 +1,8 @@
+Root={{ bootstrap_ssmtp_root }}
+Mailhub={{ bootstrap_ssmtp_server }}
+AuthUser={{ bootstrap_ssmtp_user }}
+AuthPass={{ bootstrap_ssmtp_pass }}
+RewriteDomain={{ bootstrap_ssmtp_domain }}
+{% if bootstrap_ssmtp_tls %}
+UseSTARTTLS=YES
+{% endif %}

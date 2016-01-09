@@ -1,0 +1,5 @@
+---
+- include: phase1.yml
+  when: bootstrap_phase == 1
+- include: phase2.yml
+  when: bootstrap_phase == 2

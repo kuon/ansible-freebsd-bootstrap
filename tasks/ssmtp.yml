@@ -1,0 +1,68 @@
+- name: Disable sendmail
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^sendmail_enable
+    line: sendmail_enable="NO"
+- name: Disable sendmail submit
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^sendmail_submit_enable
+    line: sendmail_submit_enable="NO"
+- name: Disable sendmail outbound
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^sendmail_outbound_enable
+    line: sendmail_outbound_enable="NO"
+- name: Disable sendmail msp
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^sendmail_msp_queue_enable
+    line: sendmail_msp_queue_enable="NO"
+
+- name: Stop sendmail
+  command: killall sendmail
+  ignore_errors: true
+
+- name: Install ssmtp
+  pkgng: name=ssmtp
+
+- name: Create ssmtp user
+  user:
+    name: ssmtp
+    group: nogroup
+    shell: /sbin/nologin
+    home: /nonexistent
+    comment: sSMTP pseudo-user
+
+- name: Remove password for ssmtp user
+  command: pw user mod ssmtp -w no
+
+- name: Set config directory permissions
+  file:
+    path: /usr/local/etc/ssmtp
+    group: wheel
+    owner: ssmtp
+    mode: 04750
+
+- name: Copy ssmtp config
+  template:
+    dest: /usr/local/etc/ssmtp/ssmtp.conf
+    src: ssmtp.conf.j2
+    group: wheel
+    owner: ssmtp
+    mode: 0640
+
+- name: Set ssmtp executable permissions
+  file:
+    path: /usr/local/sbin/ssmtp
+    group: nogroup
+    owner: ssmtp
+    mode: 04555
+
+
+- name: Replace sendmail mailer
+  template:
+    dest: /etc/mail/mailer.conf
+    src: mailer.conf.j2
+    owner: root
+    group: wheel

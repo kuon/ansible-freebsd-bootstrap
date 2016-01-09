@@ -1,0 +1,4 @@
+---
+# defaults file for freebsd-bootstrap
+bootstrap_username: admin
+bootstrap_sshkey: ~/.ssh/id_rsa.pub

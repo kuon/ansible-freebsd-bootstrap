@@ -1,0 +1,23 @@
+---
+- name: Disable ssh root login
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin No"
+
+- name: Disable root password
+  command: pw user mod root -w no
+
+- name: Install ntp
+  pkgng: name=ntp
+
+- name: Enable ntp
+  service: name=ntpd state=started enabled=yes
+
+- name: Set auto update to daily
+  lineinfile: 
+    dest: /etc/crontab 
+    regexp: freebsd-update cron
+    line: "@daily                                  root    freebsd-update cron"
+
+
+- include: ssmtp.yml
+  when: bootstrap_ssmtp_server is defined
+
