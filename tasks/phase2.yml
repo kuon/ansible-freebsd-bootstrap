@@ -21,3 +21,14 @@
 - include: ssmtp.yml
   when: bootstrap_ssmtp_server is defined
 
+- name: Install runit
+  pkgng: name=runit
+
+- name: Enable runit
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^runit_enable
+    line: runit_enable="YES"
+
+- name: Start runit
+  service: name=runit state=restarted
