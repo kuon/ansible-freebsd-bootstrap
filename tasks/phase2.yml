@@ -27,8 +27,8 @@
 - name: Enable runit
   lineinfile:
     dest: /etc/rc.conf
-    regexp: ^runit_enable
-    line: runit_enable="YES"
+    regexp: ^runsvdir_enable
+    line: runsvdir_enable="YES"
 
 - name: Start runit
-  service: name=runit state=restarted
+  service: name=runsvdir state=restarted
