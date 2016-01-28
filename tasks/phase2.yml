@@ -48,3 +48,9 @@
 
 - name: Mount all
   command: mount -a
+
+
+- name: Install base packages
+  pkgng: name={{ item }}
+  with_items:
+  - rsync
