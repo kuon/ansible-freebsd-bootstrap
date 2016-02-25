@@ -19,6 +19,12 @@
     regexp: ^sendmail_msp_queue_enable
     line: sendmail_msp_queue_enable="NO"
 
+- name: Create mail alias
+  lineinfile:
+    dest: /etc/mail.rc
+    regexp: ^alias root
+    line: alias root root<{{ bootstrap_ssmtp_root }}>
+
 - name: Stop sendmail
   command: killall sendmail
   ignore_errors: true
