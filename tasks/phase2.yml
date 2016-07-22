@@ -1,14 +1,28 @@
 ---
 - include: password.yml
+  tags: bootstrap_password
+
 - include: ntp.yml
+  tags: bootstrap_ntp
+
 - include: autoupdate.yml
+  tags: bootstrap_autoupdate
 
 - include: ssmtp.yml
+  tags: bootstrap_ssmtp
   when: bootstrap_ssmtp_server is defined
 
 - include: runit.yml
+  tags: bootstrap_runit
+
 - include: fstab.yml
+  tags: bootstrap_fstab
+
 - include: packages.yml
+  tags: bootstrap_packages
 
 - include: locale.yml
+  tags: bootstrap_locale
+  
 - include: syslog.yml
+  tags: bootstrap_syslog

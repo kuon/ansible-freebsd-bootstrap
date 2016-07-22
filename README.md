@@ -47,6 +47,22 @@ You may enable ssmtp by setting the following variables:
 - `bootstrap_ssmtp_domain`, the root domain to use as sender
 - `bootstrap_ssmtp_tls`, set to true to use TLS
 
+
+Role tags
+---------
+
+The following tags are supported to execute only one part of phase 2.
+
+- `bootstrap_password`, disable root login
+- `bootstrap_ntp`, install ntp
+- `bootstrap_autoupdate`, setup autoupdate
+- `bootstrap_ssmtp`, setup ssmtp (ssmtp configuration must also be set)
+- `bootstrap_runit`, setup runit
+- `bootstrap_fstab`, setup fstab (mount linux proc)
+- `bootstrap_packages`, install base packages
+- `bootstrap_locale`, set default locale to UTF-8
+- `bootstrap_syslog`, setup rsyslog instead of syslog
+
 Example Playbook
 ----------------
 
