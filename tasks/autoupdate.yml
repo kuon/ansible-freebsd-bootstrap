@@ -1,0 +1,5 @@
+- name: Set auto update to daily
+  lineinfile:
+    dest: /etc/crontab
+    regexp: freebsd-update cron
+    line: "@daily                                  root    freebsd-update cron"

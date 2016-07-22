@@ -1,0 +1,12 @@
+
+- name: Install runit
+  pkgng: name=runit
+
+- name: Enable runit
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^runsvdir_enable
+    line: runsvdir_enable="YES"
+
+- name: Start runit
+  service: name=runsvdir state=restarted

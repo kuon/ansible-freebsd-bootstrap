@@ -1,0 +1,15 @@
+- name: Add proc to fstab
+  lineinfile:
+    dest: /etc/fstab
+    regexp: ^proc
+    line: proc /proc procfs rw 0 0
+
+
+- name: Add fdesc to fstab
+  lineinfile:
+    dest: /etc/fstab
+    regexp: ^fdesc
+    line: fdesc /dev/fd fdescfs rw 0 0
+
+- name: Mount all
+  command: mount -a
