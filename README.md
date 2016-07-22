@@ -25,6 +25,7 @@ is carried as the non root superuser.
 - enable daily auto update
 - setup the machine to use ssmtp (optional)
 - install runit (without replacing init)
+- install rsyslog
 
 
 

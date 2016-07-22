@@ -1,0 +1,11 @@
+
+$ModLoad immark.so   # provides --MARK-- message capability
+$ModLoad imuxsock.so # provides support for local system logging
+$ModLoad imklog.so   # kernel logging
+
+
+auth.info;authpriv.info                         /var/log/auth.log
+mail.info                                       /var/log/maillog
+security.*                                      /var/log/security
+*.*                                             /var/log/messages
+*.*                                             stop

@@ -1,0 +1,30 @@
+- name: Install rsyslog
+  pkgng: name=rsyslog
+
+- name: Enable rsyslog
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^rsyslogd_enable
+    line: rsyslogd_enable="YES"
+
+- name: Set rsyslog pid
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^rsyslogd_pidfile
+    line: rsyslogd_pidfile="/var/run/syslog.pid"
+
+- name: Disable syslog
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^syslogd_enable
+    line: syslogd_enable="NO"
+
+- name: Copy config
+  template: dest=/usr/local/etc/rsyslog.conf src=syslog.conf.j2
+  tags: syslog
+
+- name: Stop syslog
+  service: name=syslogd state=stopped
+
+- name: Start rsyslog
+  service: name=rsyslogd state=started

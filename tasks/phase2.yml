@@ -57,3 +57,5 @@
   pkgng: name={{ item }}
   with_items:
   - rsync
+
+- include: syslog.yml
