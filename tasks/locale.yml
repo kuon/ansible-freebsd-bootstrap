@@ -1,13 +1,13 @@
 - name: Set default locale
   lineinfile:
     dest: /etc/login.conf
-    insertafter: "default:"
+    insertafter: "^default:\\\\$"
     line: "\t:charset=en_US.UTF-8:\\"
 
 - name: Set default locale
   lineinfile:
     dest: /etc/login.conf
-    insertafter: "default:"
+    insertafter: "^default:\\\\$"
     line: "\t:lang=en_US.UTF-8:\\"
 
 - name: Update login database
