@@ -1,17 +1,11 @@
-- name: Install rsyslog
-  pkgng: name=rsyslog
+- name: Install syslog
+  pkgng: name=syslog-ng
 
-- name: Enable rsyslog
+- name: Enable syslog
   lineinfile:
     dest: /etc/rc.conf
-    regexp: ^rsyslogd_enable
-    line: rsyslogd_enable="YES"
-
-- name: Set rsyslog pid
-  lineinfile:
-    dest: /etc/rc.conf
-    regexp: ^rsyslogd_pidfile
-    line: rsyslogd_pidfile="/var/run/syslog.pid"
+    regexp: ^syslog_ng_enable
+    line: syslog_ng_enable="YES"
 
 - name: Disable syslog
   lineinfile:
@@ -20,11 +14,13 @@
     line: syslogd_enable="NO"
 
 - name: Copy config
-  template: dest=/usr/local/etc/rsyslog.conf src=syslog.conf.j2
-  tags: syslog
+  template: dest=/usr/local/etc/syslog-ng.conf src=syslog.conf.j2
+
+- name: Create config dir
+  file: dest=/usr/local/etc/syslog-ng.d state=directory
 
 - name: Stop syslog
   service: name=syslogd state=stopped
 
-- name: Start rsyslog
-  service: name=rsyslogd state=started
+- name: Start syslog-ng
+  service: name=syslog-ng state=restarted
