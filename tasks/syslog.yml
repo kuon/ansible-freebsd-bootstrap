@@ -1,7 +1,7 @@
-- name: Install syslog
+- name: Install syslog-ng
   pkgng: name=syslog-ng
 
-- name: Enable syslog
+- name: Enable syslog-ng
   lineinfile:
     dest: /etc/rc.conf
     regexp: ^syslog_ng_enable

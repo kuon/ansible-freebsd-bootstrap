@@ -1,3 +1,5 @@
+@version:3.7
+@include "scl.conf"
 
 #
 # options
@@ -175,4 +177,4 @@ log { source(src); filter(f_slip); destination(slip); };
 #
 log { source(src); filter(f_ppp); destination(ppp); };
 
-@include "/usr/local/etc/syslog-ng.d";
+@include "/usr/local/etc/syslog-ng.d"
