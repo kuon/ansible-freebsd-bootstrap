@@ -13,11 +13,6 @@
     regexp: ^syslogd_enable
     line: syslogd_enable="NO"
 
-- name: Copy config
-  template: dest=/usr/local/etc/syslog-ng.conf src=syslog.conf.j2
-
-- name: Create config dir
-  file: dest=/usr/local/etc/syslog-ng.d state=directory
 
 - name: Stop syslog
   service: name=syslogd state=stopped
